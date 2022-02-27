@@ -1,15 +1,13 @@
-# -*- coding: UTF-8 -*-
-"""PyPoll Homework Challenge Solution."""
-
 # Add our dependencies.
 import csv
 import os
 
 # Add a variable to load a file from a path.
-file_to_load = os.path.join("..", "resources", "election_results.csv")
+file_to_load = os.path.join("resources","election_results.csv")
+
+
 # Add a variable to save the file to a path.
 file_to_save = os.path.join("analysis", "election_analysis.txt")
-
 # Initialize a total vote counter.
 total_votes = 0
 
@@ -32,7 +30,6 @@ winning_county = ""
 winning_count_county = 0
 winning_percentage_county = 0
 
-
 # Read the csv and convert it into a list of dictionaries
 with open(file_to_load) as election_data:
     reader = csv.reader(election_data)
@@ -50,7 +47,7 @@ with open(file_to_load) as election_data:
         candidate_name = row[2]
 
         # 3: Extract the county name from each row.
-        county_name = row[2]
+        county_name = row[1]
 
         # If the candidate does not match any existing candidate add it to
         # the candidate list
@@ -106,7 +103,7 @@ with open(file_to_save, "w") as txt_file:
          # 6e: Save the county votes to a text file.
         txt_file.write(county_results)
          # 6f: Write an if statement to determine the winning county and get its vote count.
-        if (county_vote_count > winning_county) and (county_vote_percentage > winning_percentage_county):
+        if (county_vote_count > winning_count_county) and (county_vote_percentage > winning_percentage_county):
             winning_county = county_name
             winning_count_county = county_vote_count
             winning_percentage_county = county_vote_percentage
@@ -114,9 +111,7 @@ with open(file_to_save, "w") as txt_file:
     # 7: Print the county with the largest turnout to the terminal.
     winning_county_summary = (
         f"-------------------------\n"
-        f"County with the largest voter turnout: {winning_county}\n"
-        f"largest voter turnout count: {winning_count_county:,}\n"
-        f"largest voter turnout Percentage: {winning_percentage_county:.1f}%\n"
+        f"Largest County Turnout: {winning_county}\n"
         f"-------------------------\n")
     print(winning_county_summary)
 
